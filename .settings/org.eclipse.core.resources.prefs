@@ -1,2 +1,16 @@
 eclipse.preferences.version=1
+encoding//StdPeriphDriver/CH58x_gpio.c=GBK
+encoding//StdPeriphDriver/CH58x_pwm.c=GBK
+encoding//StdPeriphDriver/CH58x_sys.c=GBK
+encoding//StdPeriphDriver/CH58x_timer1.c=GBK
+encoding//StdPeriphDriver/CH58x_timer2.c=GBK
+encoding//StdPeriphDriver/CH58x_uart1.c=GBK
+encoding//StdPeriphDriver/inc/CH583SFR.h=GBK
+encoding//StdPeriphDriver/inc/CH58x_clk.h=GBK
+encoding//StdPeriphDriver/inc/CH58x_common.h=GBK
+encoding//StdPeriphDriver/inc/CH58x_gpio.h=GBK
+encoding//StdPeriphDriver/inc/CH58x_pwm.h=GBK
+encoding//StdPeriphDriver/inc/CH58x_sys.h=GBK
+encoding//StdPeriphDriver/inc/CH58x_timer.h=GBK
 encoding//src/Main.c=GBK
+encoding/<project>=UTF-8
