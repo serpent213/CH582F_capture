@@ -11,27 +11,17 @@
 
 #define CAPTURE_SIZE 50
 
+// only used for error calculation
 float targetFreq;
 
+// capture meta data
 BOOL CapDMA;
 volatile uint16_t CapPointer;
 volatile BOOL CapTimeout;
 volatile BOOL CapDMA_End;
 
-// DMA buffer
+// DMA compatible buffer
 __attribute__((aligned(4))) uint32_t CapBuf[CAPTURE_SIZE];
-
-/*********************************************************************
- * @fn      CyclesPerUs
- *
- * @brief   Calculate number of clock cycles per ¦Ìs
- *
- * @return  number of cycles
- */
-uint32_t CyclesPerUs(uint32_t us)
-{
-    return (float)FREQ_SYS / 1e6 * us;
-}
 
 /*********************************************************************
  * @fn      ClockInit
@@ -45,9 +35,9 @@ void ClockInit(void)
     GPIOA_ModeCfg(GPIO_Pin_12, GPIO_ModeOut_PP_5mA);
     GPIOA_ModeCfg(GPIO_Pin_13, GPIO_ModeOut_PP_5mA);
 
-    targetFreq = (float)FREQ_SYS / (uint8_t)(FREQ_SYS / 256000) / 256;
     PWMX_CLKCfg(FREQ_SYS / 256000); // f = ~256 kHz (error 0,16%)
     PWMX_CycleCfg(PWMX_Cycle_256); // f2 = 1 kHz, T = 1 ms
+    targetFreq = (float)FREQ_SYS / (uint8_t)(FREQ_SYS / 256000) / 256;
     PWMX_ACTOUT(CH_PWM4, 256 / 2, Low_Level, ENABLE);
     PWMX_ACTOUT(CH_PWM5, 256 / 2, Low_Level, ENABLE);
 }
@@ -218,7 +208,7 @@ void DisplayResults(void)
                 (uint32_t)error, (uint8_t)(error * 100) % 100);
         }
     } else {
-        printf("no edges captured...\n");
+        printf("no edges captured.\n");
     }
 
     if (CapTimeout) {
