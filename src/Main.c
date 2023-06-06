@@ -187,7 +187,7 @@ void DisplayResults(void)
                 int32_t cycles = CapBuf[start + j] & (1 << 25) - 1;
                 float usec = cycles * 1e6 / FREQ_SYS;
                 printf(edge ? "/" : "\\");
-                printf("%4ld,%02d   ", (uint32_t)usec, (uint8_t)(usec * 100) % 100);
+                printf("%4ld,%02ld   ", (uint32_t)usec, (uint32_t)(usec * 100) % 100);
 
                 // drop first sample for average calculatoin
                 if (avgSkip > 0) {
@@ -197,15 +197,15 @@ void DisplayResults(void)
                     avgSkip += 1;
                 }
             }
-            printf(" [usec]\n");
+            printf("[usec]\n");
         }
 
         if (avgCount > 0) {
             float freq = 0.5 / ((float)avgSum / avgCount / FREQ_SYS);
             float error = fabsf(targetFreq - freq) / targetFreq * 100;
-            printf("frequency (avg.): %ld,%02d Hz (error = %ld,%02d %%)\n",
-                (uint32_t)freq, (uint8_t)(freq * 100) % 100,
-                (uint32_t)error, (uint8_t)(error * 100) % 100);
+            printf("frequency (avg.): %ld,%02ld Hz (error = %ld,%02ld %%)\n",
+                (uint32_t)freq, (uint32_t)(freq * 100) % 100,
+                (uint32_t)error, (uint32_t)(error * 100) % 100);
         }
     } else {
         printf("no edges captured.\n");
@@ -254,7 +254,7 @@ int main()
     printf("(PWM5) PA13: 1 kHz* clock output (push pull)\n");
     printf("(TMR1) PB10: input DMA (pull up)\n");
     printf("(TMR2) PB11: input IRQ (pull up)\n");
-    printf("* %ld,%02d Hz\n", (uint32_t)targetFreq, (uint8_t)(targetFreq * 100) % 100);
+    printf("* %ld,%02ld Hz\n", (uint32_t)targetFreq, (uint32_t)(targetFreq * 100) % 100);
 
     while(1) {
         IRQ_Run();
